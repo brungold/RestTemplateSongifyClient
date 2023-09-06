@@ -1,4 +1,4 @@
-package com.resttemplatesongifyclient.songify;
+package com.resttemplatesongifyclient.songify.proxy;
 
 import java.util.Map;
 

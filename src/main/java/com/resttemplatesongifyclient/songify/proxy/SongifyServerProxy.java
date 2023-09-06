@@ -1,4 +1,4 @@
-package com.resttemplatesongifyclient.songify;
+package com.resttemplatesongifyclient.songify.proxy;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpMethod;
@@ -26,7 +26,8 @@ public class SongifyServerProxy {
     @Value("${songify-server.service.port}")
     int port;
 
-    public SongifyResponse makeGetAllSongsRequest() {
+    public SongifyResponse getAllSongsRequest() {
+        //GET http://localhost:8080/songs
         UriComponentsBuilder builder = UriComponentsBuilder
                 .newInstance()
                 .scheme("http")
