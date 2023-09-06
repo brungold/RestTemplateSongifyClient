@@ -6,8 +6,6 @@ import com.resttemplatesongifyclient.songify.proxy.SongifyResponse;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
-
 @Component
 @Log4j2
 public class SongifyServiceMapper {
@@ -23,7 +21,7 @@ public class SongifyServiceMapper {
             return objectMapper.readValue(json, SongifyResponse.class);
         } catch (JsonProcessingException e) {
             log.error("SongifyMapper could not map json");
-            return new SongifyResponse(Collections.emptyMap());
+            return null;
         }
     }
 }

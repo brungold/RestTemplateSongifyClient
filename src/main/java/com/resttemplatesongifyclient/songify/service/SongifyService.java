@@ -17,15 +17,14 @@ public class SongifyService {
         this.songifyServerClient = songifyServerClient;
         this.songifyServiceMapper = songifyServiceMapper;
     }
-    public SongifyResponse getAllSongs(){
-        String jsonSongify = songifyServerClient.getAllSongsRequest();
-        if (jsonSongify == null){
-            log.error("json was null");
+    public SongifyResponse getAllSongs() {
+        SongifyResponse songifyResponse = songifyServerClient.getAllSongsRequest();
+        if (songifyResponse == null) {
+            log.error("Response was null");
             return null;
         }
-        SongifyResponse response = songifyServiceMapper.mapJsonToSongifyResponse(jsonSongify);
-        log.info("Songify fetched: " + response);
-        return response;
+        log.info("Songify fetched: " + songifyResponse);
+        return songifyResponse;
     }
 
 }
