@@ -26,7 +26,7 @@ public class SongifyServerProxy {
     @Value("${songify-server.service.port}")
     int port;
 
-    public SongifyResponse getAllSongsRequest() {
+    public String  getAllSongsRequest() {
         //GET http://localhost:8080/songs
         UriComponentsBuilder builder = UriComponentsBuilder
                 .newInstance()
@@ -35,11 +35,11 @@ public class SongifyServerProxy {
                 .port(port)
                 .path("/songs");
         try {
-            ResponseEntity<SongifyResponse>response = restTemplate.exchange(
+            ResponseEntity<String >response = restTemplate.exchange(
                     builder.build().toUri(),
                     HttpMethod.GET,
                     null,
-                    SongifyResponse.class
+                    String .class
             );
             return response.getBody();
         } catch (RestClientResponseException exception) {
