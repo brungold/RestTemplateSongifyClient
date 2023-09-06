@@ -49,4 +49,28 @@ public class SongifyServerProxy {
         }
         return null;
     }
+    public String getSongById() {
+        //GET http://localhost:8080/songs
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host(url)
+                .port(port)
+                .path("/songs")
+                .path("/1");
+        try {
+            ResponseEntity<String >response = restTemplate.exchange(
+                    builder.build().toUri(),
+                    HttpMethod.GET,
+                    null,
+                    String .class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            log.error(exception.getStatusText() + " " + exception.getStatusCode().value());
+        } catch (RestClientException exception) {
+            log.error(exception.getMessage());
+        }
+        return null;
+    }
 }

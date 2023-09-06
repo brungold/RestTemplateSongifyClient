@@ -1,6 +1,8 @@
 package com.resttemplatesongifyclient.songify.proxy;
 
-import java.util.Map;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.Map;
+@JsonIgnoreProperties
 public record SongifyResponse(Map<Integer, SongifyRequest> songs) {
 }
