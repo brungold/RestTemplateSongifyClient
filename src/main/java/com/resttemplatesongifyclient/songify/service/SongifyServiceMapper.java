@@ -29,8 +29,8 @@ public class SongifyServiceMapper {
     }
     public SongifyResponseById mapJsonToSongifyResponseById(String json) {
         try {
-            SongifyResponseById songifyResponse = objectMapper.readValue(json, SongifyResponseById.class);
-            return songifyResponse;
+            SongifyResponseById songifyResponseById = objectMapper.readValue(json, SongifyResponseById.class);
+            return songifyResponseById;
         } catch (JsonProcessingException e) {
             log.error("SongifyMapper could not map json to SongifyRequest", e);
             return null;

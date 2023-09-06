@@ -49,11 +49,11 @@ public class SongifyService {
             log.error("JSON response was null");
             return;
         }
-        SongifyResponseById songifyResponse = songifyServiceMapper.mapJsonToSongifyResponseById(jsonSongify);
+        SongifyResponseById songifyResponseById = songifyServiceMapper.mapJsonToSongifyResponseById(jsonSongify);
 
-        if (songifyResponse != null) {
-            log.info("Song Name: " + songifyResponse.song().name() +  " "
-                    + "Artist: " + songifyResponse.song().artist());
+        if (songifyResponseById != null) {
+            log.info("Song Name: " + songifyResponseById.song().name() +  " "
+                    + "Artist: " + songifyResponseById.song().artist());
         } else {
             log.error("SongifyRequest was null");
         }
