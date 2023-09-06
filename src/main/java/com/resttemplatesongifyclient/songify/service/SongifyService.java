@@ -17,7 +17,7 @@ public class SongifyService {
         this.songifyServerClient = songifyServerClient;
         this.songifyServiceMapper = songifyServiceMapper;
     }
-    public SongifyResponse getAllSongs() {
+    public SongifyResponse getAllSongsAsArray() {
         String jsonSongify = songifyServerClient.getAllSongsRequest();
         if (jsonSongify == null) {
             log.error("JSON response was null");
@@ -28,5 +28,17 @@ public class SongifyService {
             log.info("Songify fetched: " + songifyResponse);
         }
         return songifyResponse;
+    }
+    public void getAllSongsAndDisplayEachOnANewLine() {
+        String jsonSongify = songifyServerClient.getAllSongsRequest();
+        SongifyResponse songifyResponse = songifyServiceMapper.mapJsonToSongifyResponse(jsonSongify);
+        if (songifyResponse == null) {
+            log.error("SongifyResponse was null");
+            return;
+        }
+
+        songifyResponse.songs().forEach((index, song) -> {
+            log.info("Index: " + index + " Artist: " + song.artist() + " Song Name: " + song.name());
+        });
     }
 }

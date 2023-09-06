@@ -25,7 +25,8 @@ public class RestTemplateSongifyClientApplication {
 
     @EventListener(ApplicationStartedEvent.class)
     public void run(){
-        songifyService.getAllSongs();
+        //songifyService.getAllSongsAsArray();
+        songifyService.getAllSongsAndDisplayEachOnANewLine();
     }
 
 }
