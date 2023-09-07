@@ -4,5 +4,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Map;
 @JsonIgnoreProperties
-public record SongifyResponse(Map<Integer, SongifyRequest> songs) {
+public record SongifyResponse(Map<Integer, SongifyRequestVariableName> songs) {
 }

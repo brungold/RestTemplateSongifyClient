@@ -59,13 +59,17 @@ public class SongifyService {
         }
     }
     public void postSong() {
-        SongifyRequest requestBody = new SongifyRequest("Changes", "2Pac");
-        String json = songifyServerClient.postSong(requestBody);
+        String json = songifyServerClient.postSong();
         if (json == null) {
             log.error("JSON response was null");
             return;
         }
-        SongifyRequest songifyResponseById = songifyServiceMapper.mapJsonToSongifyRequest(json);
+        SongifyRequestVariablesongName songifyRequestVariablesongName = songifyServiceMapper.mapJsonToSongifyRequestVariableSongName(json);
+        if (songifyRequestVariablesongName != null) {
+            log.info("Posted song: " + songifyRequestVariablesongName.songName() + " " + songifyRequestVariablesongName.artist());
+        } else {
+            log.error("SongifyRequest was null");
+        }
     }
 
 }

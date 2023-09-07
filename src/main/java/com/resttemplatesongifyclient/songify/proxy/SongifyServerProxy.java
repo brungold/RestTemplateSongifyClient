@@ -35,7 +35,8 @@ public class SongifyServerProxy {
                 .host(url)
                 .port(port)
                 .path("/songs");
-        HttpEntity<SongifyRequest> httpEntity = new HttpEntity<>();
+        SongifyRequestVariablesongName songifyRequestVariablesongName = new SongifyRequestVariablesongName("Nowa", "Piosenka");
+        HttpEntity<SongifyRequestVariablesongName> httpEntity = new HttpEntity<>(songifyRequestVariablesongName);
         try {
             ResponseEntity<String >response = restTemplate.exchange(
                     builder.build().toUri(),

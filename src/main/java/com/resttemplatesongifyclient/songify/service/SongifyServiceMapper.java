@@ -2,7 +2,8 @@ package com.resttemplatesongifyclient.songify.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.resttemplatesongifyclient.songify.proxy.SongifyRequest;
+import com.resttemplatesongifyclient.songify.proxy.SongifyRequestVariableName;
+import com.resttemplatesongifyclient.songify.proxy.SongifyRequestVariablesongName;
 import com.resttemplatesongifyclient.songify.proxy.SongifyResponse;
 import com.resttemplatesongifyclient.songify.proxy.SongifyResponseById;
 import lombok.extern.log4j.Log4j2;
@@ -18,7 +19,7 @@ public class SongifyServiceMapper {
         this.objectMapper = objectMapper;
     }
 
-    SongifyResponse mapJsonToSongifyResponse(String json){
+    SongifyResponse mapJsonToSongifyResponse(String json) {
         try {
             SongifyResponse response = objectMapper.readValue(json, SongifyResponse.class);
             return response;
@@ -27,19 +28,29 @@ public class SongifyServiceMapper {
             return null;
         }
     }
-    public SongifyResponseById mapJsonToSongifyResponseById(String json) {
+    SongifyResponseById mapJsonToSongifyResponseById(String json) {
         try {
-            SongifyResponseById songifyResponseById = objectMapper.readValue(json, SongifyResponseById.class);
-            return songifyResponseById;
+            SongifyResponseById response = objectMapper.readValue(json, SongifyResponseById.class);
+            return response;
+        } catch (JsonProcessingException e) {
+            log.error("SongifyMapper could not map json", e);
+            return null;
+        }
+    }
+
+    public SongifyRequestVariablesongName mapJsonToSongifyRequestVariableSongName(String json) {
+        try {
+            SongifyRequestVariablesongName songifyRequestVariablesongName = objectMapper.readValue(json, SongifyRequestVariablesongName.class);
+            return songifyRequestVariablesongName;
         } catch (JsonProcessingException e) {
             log.error("SongifyMapper could not map json to SongifyRequest", e);
             return null;
         }
     }
-    public SongifyRequest mapJsonToSongifyRequest(String json) {
+    public SongifyRequestVariableName mapJsonToSongifyRequestVariableName(String json) {
         try {
-            SongifyRequest songifyRequest = objectMapper.readValue(json, SongifyRequest.class);
-            return songifyRequest;
+            SongifyRequestVariableName songifyRequestVariableName = objectMapper.readValue(json, SongifyRequestVariableName.class);
+            return songifyRequestVariableName;
         } catch (JsonProcessingException e) {
             log.error("SongifyMapper could not map json to SongifyRequest", e);
             return null;
