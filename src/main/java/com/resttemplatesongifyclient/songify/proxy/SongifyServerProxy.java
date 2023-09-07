@@ -123,4 +123,28 @@ public class SongifyServerProxy {
         }
         return null;
     }
+    public String putSong(Integer id, SongifyRequestVariablesongName songifyRequestVariablesongName) {
+        //GET http://localhost:8080/songs
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host(url)
+                .port(port)
+                .path("/songs/" + id);
+        HttpEntity<SongifyRequestVariablesongName> httpEntity = new HttpEntity<>(songifyRequestVariablesongName);
+        try {
+            ResponseEntity<String >response = restTemplate.exchange(
+                    builder.build().toUri(),
+                    HttpMethod.PUT,
+                    httpEntity,
+                    String.class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            log.error(exception.getStatusText() + " " + exception.getStatusCode().value());
+        } catch (RestClientException exception) {
+            log.error(exception.getMessage());
+        }
+        return null;
+    }
 }

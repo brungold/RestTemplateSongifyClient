@@ -1,5 +1,6 @@
 package com.resttemplatesongifyclient;
 
+import com.resttemplatesongifyclient.songify.proxy.SongifyRequestVariablesongName;
 import com.resttemplatesongifyclient.songify.service.SongifyService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +31,7 @@ public class RestTemplateSongifyClientApplication {
         //songifyService.getSongById();
         //songifyService.postSong();
         //songifyService.deleteSongById(2);
+        songifyService.putSong(1, new SongifyRequestVariablesongName("Nuevo concion", "artis"));
     }
 
 }

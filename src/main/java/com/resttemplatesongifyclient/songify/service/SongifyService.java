@@ -81,4 +81,18 @@ public class SongifyService {
             log.error("Nie udało się usunąć piosenki.");
         }
     }
+
+    public void putSong(Integer id, SongifyRequestVariablesongName songifyRequestVariablesongName) {
+        String jsonPutResult = songifyServerClient.putSong(id, songifyRequestVariablesongName);
+        if (jsonPutResult == null) {
+            log.error("JSON response was null");
+            return;
+        }
+        SongifyRequestVariablesongName updatedSong = songifyServiceMapper.mapJsonToSongifyRequestVariableSongName(jsonPutResult);
+        if (updatedSong != null) {
+            log.info("Song has been updated: " + updatedSong);
+        } else {
+            log.error("Song update error.");
+        }
+    }
 }
