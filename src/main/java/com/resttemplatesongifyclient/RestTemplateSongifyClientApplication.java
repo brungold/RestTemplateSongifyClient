@@ -27,7 +27,8 @@ public class RestTemplateSongifyClientApplication {
     public void run(){
         //songifyService.getAllSongsAsArray();
         //songifyService.getAllSongsAndDisplayEachOnANewLine();
-        songifyService.getSongById();
+        //songifyService.getSongById();
+        songifyService.
     }
 
 }

@@ -58,4 +58,14 @@ public class SongifyService {
             log.error("SongifyRequest was null");
         }
     }
+    public void postSong() {
+        SongifyRequest requestBody = new SongifyRequest("Changes", "2Pac");
+        String json = songifyServerClient.postSong(requestBody);
+        if (json == null) {
+            log.error("JSON response was null");
+            return;
+        }
+        SongifyRequest songifyResponseById = songifyServiceMapper.mapJsonToSongifyRequest(json);
+    }
+
 }

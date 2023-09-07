@@ -36,4 +36,13 @@ public class SongifyServiceMapper {
             return null;
         }
     }
+    public SongifyRequest mapJsonToSongifyRequest(String json) {
+        try {
+            SongifyRequest songifyRequest = objectMapper.readValue(json, SongifyRequest.class);
+            return songifyRequest;
+        } catch (JsonProcessingException e) {
+            log.error("SongifyMapper could not map json to SongifyRequest", e);
+            return null;
+        }
+    }
 }

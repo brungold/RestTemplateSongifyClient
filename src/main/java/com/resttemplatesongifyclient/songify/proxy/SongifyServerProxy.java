@@ -1,6 +1,7 @@
 package com.resttemplatesongifyclient.songify.proxy;
 
 import lombok.extern.log4j.Log4j2;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class SongifyServerProxy {
     @Value("${songify-server.service.port}")
     int port;
 
-    public String  getAllSongsRequest() {
+    public String  postSong() {
         //GET http://localhost:8080/songs
         UriComponentsBuilder builder = UriComponentsBuilder
                 .newInstance()
@@ -34,11 +35,12 @@ public class SongifyServerProxy {
                 .host(url)
                 .port(port)
                 .path("/songs");
+        HttpEntity<SongifyRequest> httpEntity = new HttpEntity<>();
         try {
             ResponseEntity<String >response = restTemplate.exchange(
                     builder.build().toUri(),
-                    HttpMethod.GET,
-                    null,
+                    HttpMethod.POST,
+                    httpEntity,
                     String .class
             );
             return response.getBody();
@@ -58,6 +60,30 @@ public class SongifyServerProxy {
                 .port(port)
                 .path("/songs")
                 .path("/1");
+        try {
+            ResponseEntity<String >response = restTemplate.exchange(
+                    builder.build().toUri(),
+                    HttpMethod.GET,
+                    null,
+                    String .class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            log.error(exception.getStatusText() + " " + exception.getStatusCode().value());
+        } catch (RestClientException exception) {
+            log.error(exception.getMessage());
+        }
+        return null;
+    }
+
+    public String getAllSongsRequest() {
+        //GET http://localhost:8080/songs
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host(url)
+                .port(port)
+                .path("/songs");
         try {
             ResponseEntity<String >response = restTemplate.exchange(
                     builder.build().toUri(),
