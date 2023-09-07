@@ -27,6 +27,54 @@ public class SongifyServerProxy {
     @Value("${songify-server.service.port}")
     int port;
 
+    public String getSongById() {
+        //GET http://localhost:8080/songs
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host(url)
+                .port(port)
+                .path("/songs")
+                .path("/1");
+        try {
+            ResponseEntity<String >response = restTemplate.exchange(
+                    builder.build().toUri(),
+                    HttpMethod.GET,
+                    null,
+                    String .class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            log.error(exception.getStatusText() + " " + exception.getStatusCode().value());
+        } catch (RestClientException exception) {
+            log.error(exception.getMessage());
+        }
+        return null;
+    }
+    public String getAllSongsRequest() {
+        //GET http://localhost:8080/songs
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host(url)
+                .port(port)
+                .path("/songs");
+        try {
+            ResponseEntity<String >response = restTemplate.exchange(
+                    builder.build().toUri(),
+                    HttpMethod.GET,
+                    null,
+                    String .class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            log.error(exception.getStatusText() + " " + exception.getStatusCode().value());
+        } catch (RestClientException exception) {
+            log.error(exception.getMessage());
+        }
+        return null;
+    }
+
     public String  postSong() {
         //GET http://localhost:8080/songs
         UriComponentsBuilder builder = UriComponentsBuilder
@@ -52,43 +100,18 @@ public class SongifyServerProxy {
         }
         return null;
     }
-    public String getSongById() {
+    public String deleteSongById(Integer id) {
         //GET http://localhost:8080/songs
         UriComponentsBuilder builder = UriComponentsBuilder
                 .newInstance()
                 .scheme("http")
                 .host(url)
                 .port(port)
-                .path("/songs")
-                .path("/1");
+                .path("/songs/" + id);
         try {
             ResponseEntity<String >response = restTemplate.exchange(
                     builder.build().toUri(),
-                    HttpMethod.GET,
-                    null,
-                    String .class
-            );
-            return response.getBody();
-        } catch (RestClientResponseException exception) {
-            log.error(exception.getStatusText() + " " + exception.getStatusCode().value());
-        } catch (RestClientException exception) {
-            log.error(exception.getMessage());
-        }
-        return null;
-    }
-
-    public String getAllSongsRequest() {
-        //GET http://localhost:8080/songs
-        UriComponentsBuilder builder = UriComponentsBuilder
-                .newInstance()
-                .scheme("http")
-                .host(url)
-                .port(port)
-                .path("/songs");
-        try {
-            ResponseEntity<String >response = restTemplate.exchange(
-                    builder.build().toUri(),
-                    HttpMethod.GET,
+                    HttpMethod.DELETE,
                     null,
                     String .class
             );

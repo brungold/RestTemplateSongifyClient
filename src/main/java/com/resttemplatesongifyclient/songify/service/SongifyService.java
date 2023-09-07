@@ -66,10 +66,19 @@ public class SongifyService {
         }
         SongifyRequestVariablesongName songifyRequestVariablesongName = songifyServiceMapper.mapJsonToSongifyRequestVariableSongName(json);
         if (songifyRequestVariablesongName != null) {
-            log.info("Posted song: " + songifyRequestVariablesongName.songName() + " " + songifyRequestVariablesongName.artist());
+            log.info("Posted new song)");
         } else {
             log.error("SongifyRequest was null");
         }
     }
 
+    public void deleteSongById(Integer id) {
+        String deleteResult = songifyServerClient.deleteSongById(id);
+
+        if (deleteResult != null) {
+            log.info("Piosenka została usunięta: " + deleteResult);
+        } else {
+            log.error("Nie udało się usunąć piosenki.");
+        }
+    }
 }
