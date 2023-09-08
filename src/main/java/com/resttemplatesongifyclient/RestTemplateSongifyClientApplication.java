@@ -30,10 +30,10 @@ public class RestTemplateSongifyClientApplication {
     public void run() {
         //songifyService.getAllSongsAsArray();
         //songifyService.getAllSongsAndDisplayEachOnANewLine();
-        //songifyService.getSongById();
+        songifyService.getSongById(1);
         //songifyService.postSong();
         //songifyService.deleteSongById(2);
         //songifyService.putSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));
-        songifyService.patchSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));
+        //songifyService.patchSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));
     }
 }

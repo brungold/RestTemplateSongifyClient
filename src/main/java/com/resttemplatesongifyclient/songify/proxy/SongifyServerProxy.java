@@ -28,20 +28,22 @@ public class SongifyServerProxy {
     @Value("${songify-server.service.port}")
     int port;
 
-    public String getSongById() {
+    public String getSongById(Integer id) {
         //GET http://localhost:8080/songs
         UriComponentsBuilder builder = UriComponentsBuilder
                 .newInstance()
                 .scheme("http")
                 .host(url)
                 .port(port)
-                .path("/songs")
-                .path("/1");
+                .path("/songs/" + id);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add("requestId", "someId");
+        HttpEntity<HttpHeaders> httpEntity = new HttpEntity<>(httpHeaders);
         try {
             ResponseEntity<String >response = restTemplate.exchange(
                     builder.build().toUri(),
                     HttpMethod.GET,
-                    null,
+                    httpEntity,
                     String .class
             );
             return response.getBody();

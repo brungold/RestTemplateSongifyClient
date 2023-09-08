@@ -43,8 +43,8 @@ public class SongifyService {
         });
     }
 
-    public void getSongById() {
-        String jsonSongify = songifyServerClient.getSongById();
+    public void getSongById(Integer id) {
+        String jsonSongify = songifyServerClient.getSongById(id);
         if (jsonSongify == null) {
             log.error("JSON response was null");
             return;
@@ -52,7 +52,8 @@ public class SongifyService {
         SongifyResponseById songifyResponseById = songifyServiceMapper.mapJsonToSongifyResponseById(jsonSongify);
 
         if (songifyResponseById != null) {
-            log.info("Song Name: " + songifyResponseById.song().name() + " "
+            log.info("Song with id: " + id + ". "
+                    + "Song Name: " + songifyResponseById.song().name() + " "
                     + "Artist: " + songifyResponseById.song().artist());
         } else {
             log.error("SongifyRequest was null");
