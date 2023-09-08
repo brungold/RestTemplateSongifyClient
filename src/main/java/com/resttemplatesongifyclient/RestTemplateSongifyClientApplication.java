@@ -30,8 +30,8 @@ public class RestTemplateSongifyClientApplication {
     public void run() {
         //songifyService.getAllSongsAsArray();
         //songifyService.getAllSongsAndDisplayEachOnANewLine();
-        songifyService.getSongById(1);
-        //songifyService.postSong();
+        //songifyService.getSongById(1);
+        songifyService.postSong(new SongifyRequestVariablesongName("DodanaPiosenka", "DodanyArtysta"));
         //songifyService.deleteSongById(2);
         //songifyService.putSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));
         //songifyService.patchSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));

@@ -78,7 +78,7 @@ public class SongifyServerProxy {
         return null;
     }
 
-    public String  postSong() {
+    public String  postSong(SongifyRequestVariablesongName songifyRequestVariablesongName) {
         //GET http://localhost:8080/songs
         UriComponentsBuilder builder = UriComponentsBuilder
                 .newInstance()
@@ -86,7 +86,6 @@ public class SongifyServerProxy {
                 .host(url)
                 .port(port)
                 .path("/songs");
-        SongifyRequestVariablesongName songifyRequestVariablesongName = new SongifyRequestVariablesongName("Nowa", "Piosenka");
         HttpEntity<SongifyRequestVariablesongName> httpEntity = new HttpEntity<>(songifyRequestVariablesongName);
         try {
             ResponseEntity<String >response = restTemplate.exchange(

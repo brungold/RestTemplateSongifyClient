@@ -60,15 +60,15 @@ public class SongifyService {
         }
     }
 
-    public void postSong() {
-        String json = songifyServerClient.postSong();
+    public void postSong(SongifyRequestVariablesongName songifyRequestVariablesongName) {
+        String json = songifyServerClient.postSong(songifyRequestVariablesongName);
         if (json == null) {
             log.error("JSON response was null");
             return;
         }
-        SongifyRequestVariablesongName songifyRequestVariablesongName = songifyServiceMapper.mapJsonToSongifyRequestVariableSongName(json);
+        songifyRequestVariablesongName = songifyServiceMapper.mapJsonToSongifyRequestVariableSongName(json);
         if (songifyRequestVariablesongName != null) {
-            log.info("Posted new song)");
+            log.info("Posted new song");
         } else {
             log.error("SongifyRequest was null");
         }
