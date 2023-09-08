@@ -34,6 +34,6 @@ public class RestTemplateSongifyClientApplication {
         //songifyService.postSong();
         //songifyService.deleteSongById(2);
         //songifyService.putSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));
-        songifyService.patchSong(1, (new SongifyRequestVariablesongName("Nuevo cancion", "artist")));
+        songifyService.patchSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));
     }
 }

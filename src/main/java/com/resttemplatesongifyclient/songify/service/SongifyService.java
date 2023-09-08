@@ -105,7 +105,7 @@ public class SongifyService {
         }
         SongifyPatchResponse partiallyUpdatedSong = songifyServiceMapper.mapJsonToSongifyPatchResponse(jsonPatchResult);
         if (partiallyUpdatedSong != null) {
-            log.info("Song has been updated: " + partiallyUpdatedSong);
+            log.info("Song has been updated. New song name:" + partiallyUpdatedSong.updatedSong().artist() + ", new artist name: " + partiallyUpdatedSong.updatedSong().name());
         } else {
             log.error("Song update error.");
         }
