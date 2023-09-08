@@ -52,12 +52,13 @@ public class SongifyService {
         SongifyResponseById songifyResponseById = songifyServiceMapper.mapJsonToSongifyResponseById(jsonSongify);
 
         if (songifyResponseById != null) {
-            log.info("Song Name: " + songifyResponseById.song().name() +  " "
+            log.info("Song Name: " + songifyResponseById.song().name() + " "
                     + "Artist: " + songifyResponseById.song().artist());
         } else {
             log.error("SongifyRequest was null");
         }
     }
+
     public void postSong() {
         String json = songifyServerClient.postSong();
         if (json == null) {
@@ -91,6 +92,20 @@ public class SongifyService {
         SongifyRequestVariablesongName updatedSong = songifyServiceMapper.mapJsonToSongifyRequestVariableSongName(jsonPutResult);
         if (updatedSong != null) {
             log.info("Song has been updated: " + updatedSong);
+        } else {
+            log.error("Song update error.");
+        }
+    }
+
+    public void patchSong(Integer id, SongifyRequestVariablesongName songifyRequestVariablesongName) {
+        String jsonPatchResult = songifyServerClient.patchSong(id, songifyRequestVariablesongName);
+        if (jsonPatchResult == null) {
+            log.error("JSON response was null");
+            return;
+        }
+        SongifyPatchResponse partiallyUpdatedSong = songifyServiceMapper.mapJsonToSongifyPatchResponse(jsonPatchResult);
+        if (partiallyUpdatedSong != null) {
+            log.info("Song has been updated: " + partiallyUpdatedSong);
         } else {
             log.error("Song update error.");
         }

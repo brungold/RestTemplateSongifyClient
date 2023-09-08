@@ -1,5 +1,7 @@
 package com.resttemplatesongifyclient;
 
+import com.resttemplatesongifyclient.songify.proxy.SongifyPatchResponse;
+import com.resttemplatesongifyclient.songify.proxy.SongifyRequestVariableName;
 import com.resttemplatesongifyclient.songify.proxy.SongifyRequestVariablesongName;
 import com.resttemplatesongifyclient.songify.service.SongifyService;
 import lombok.extern.log4j.Log4j2;
@@ -25,13 +27,13 @@ public class RestTemplateSongifyClientApplication {
     }
 
     @EventListener(ApplicationStartedEvent.class)
-    public void run(){
+    public void run() {
         //songifyService.getAllSongsAsArray();
         //songifyService.getAllSongsAndDisplayEachOnANewLine();
         //songifyService.getSongById();
         //songifyService.postSong();
         //songifyService.deleteSongById(2);
-        songifyService.putSong(1, new SongifyRequestVariablesongName("Nuevo concion", "artis"));
+        //songifyService.putSong(1, new SongifyRequestVariablesongName("Nuevo cancion", "artist"));
+        songifyService.patchSong(1, (new SongifyRequestVariablesongName("Nuevo cancion", "artist")));
     }
-
 }

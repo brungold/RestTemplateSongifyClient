@@ -2,10 +2,7 @@ package com.resttemplatesongifyclient.songify.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.resttemplatesongifyclient.songify.proxy.SongifyRequestVariableName;
-import com.resttemplatesongifyclient.songify.proxy.SongifyRequestVariablesongName;
-import com.resttemplatesongifyclient.songify.proxy.SongifyResponse;
-import com.resttemplatesongifyclient.songify.proxy.SongifyResponseById;
+import com.resttemplatesongifyclient.songify.proxy.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Component;
 
@@ -53,6 +50,15 @@ public class SongifyServiceMapper {
             return songifyRequestVariableName;
         } catch (JsonProcessingException e) {
             log.error("SongifyMapper could not map json to SongifyRequest", e);
+            return null;
+        }
+    }
+    public SongifyPatchResponse mapJsonToSongifyPatchResponse(String json) {
+        try {
+            SongifyPatchResponse songifyPatchResponse = objectMapper.readValue(json, SongifyPatchResponse.class);
+            return songifyPatchResponse;
+        } catch (JsonProcessingException e) {
+            log.error("SongifyMapper could not map json to SongifyPatchResponse", e);
             return null;
         }
     }

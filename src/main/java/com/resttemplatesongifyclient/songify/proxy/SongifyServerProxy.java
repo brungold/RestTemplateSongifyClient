@@ -2,6 +2,7 @@ package com.resttemplatesongifyclient.songify.proxy;
 
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -136,6 +137,33 @@ public class SongifyServerProxy {
             ResponseEntity<String >response = restTemplate.exchange(
                     builder.build().toUri(),
                     HttpMethod.PUT,
+                    httpEntity,
+                    String.class
+            );
+            return response.getBody();
+        } catch (RestClientResponseException exception) {
+            log.error(exception.getStatusText() + " " + exception.getStatusCode().value());
+        } catch (RestClientException exception) {
+            log.error(exception.getMessage());
+        }
+        return null;
+    }
+
+    public String patchSong(Integer id, SongifyRequestVariablesongName songifyRequestVariablesongName) {
+        //GET http://localhost:8080/songs
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .newInstance()
+                .scheme("http")
+                .host(url)
+                .port(port)
+                .path("/songs/" + id);
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-Type", "application/json");
+        HttpEntity<SongifyRequestVariablesongName> httpEntity = new HttpEntity<>(songifyRequestVariablesongName, headers);
+        try {
+            ResponseEntity<String> response = restTemplate.exchange(
+                    builder.build().toUri(),
+                    HttpMethod.PATCH,
                     httpEntity,
                     String.class
             );
